@@ -1,7 +1,9 @@
 import React from "react";
 import { withStyles, Paper, Typography } from "@material-ui/core";
 import { get } from "lodash";
+import moment from "moment";
 import { Styles } from "./styles";
+import { dateFormat } from "../../utils";
 
 const SearchDataCard = ({ classes, result }) => {
   return (
@@ -28,14 +30,14 @@ const SearchDataCard = ({ classes, result }) => {
           <span className={classes.value}>{get(result, "average_rating")}</span>
         </Typography>
         <Typography>
-          Date Published:{" "}
-          <span className={classes.value}>{`${get(
-            result,
-            "original_publication_day"
-          )}-${get(result, "original_publication_month")}-${get(
-            result,
-            "original_publication_year"
-          )}`}</span>
+          Published on:{" "}
+          <span className={classes.value}>
+            {dateFormat(
+              get(result, "original_publication_year"),
+              get(result, "original_publication_month"),
+              get(result, "original_publication_day")
+            )}
+          </span>
         </Typography>
       </div>
     </Paper>
