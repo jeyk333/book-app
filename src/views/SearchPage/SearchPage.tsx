@@ -5,16 +5,26 @@ import { getBooks } from "../../store/getBooks/action";
 import { Styles } from "./styles";
 import Header from "../../components/Header";
 
-const SearchPage = ({ getBooks }) => {
+const SearchPage = ({ classes, getBooks }) => {
   const [Search, setSearch] = useState("");
   useEffect(() => {
-    getBooks();
+    getBooks(Search);
   }, []);
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
   return (
     <div>
       <Header />
-      <div>
-        <TextField placeholder="Search by Book Title, Author or ISBN" />
+      <div className={classes.root}>
+        <TextField
+          placeholder="Search by Book Title, Author or ISBN"
+          value={Search}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+        />
       </div>
     </div>
   );
