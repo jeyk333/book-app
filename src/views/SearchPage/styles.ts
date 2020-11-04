@@ -4,4 +4,11 @@ export const Styles = (theme: Theme) => ({
     width: "70%",
     margin: "30px auto",
   },
+  content: {
+    marginTop: 20,
+  },
+  total: {
+    borderBottom: "1px solid #ccc",
+    marginBottom: 5,
+  },
 });

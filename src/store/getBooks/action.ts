@@ -44,7 +44,7 @@ export const getBooks = (value) => {
       )
       .then((resp) => {
         let parsedData = parse(resp.data, options);
-        dispatch(getBooksSuccess(parsedData));
+        dispatch(getBooksSuccess(parsedData.GoodreadsResponse.search));
       })
       .catch((err) => {
         getBooksError(err);
