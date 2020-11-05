@@ -2,7 +2,7 @@ import React from "react";
 import { AppBar, Toolbar, Typography, withStyles } from "@material-ui/core";
 import { Styles } from "./styles";
 
-const Header = ({ classes }) => {
+const Header: React.FC = ({ classes }) => {
   return (
     <AppBar position="static" elevation={2}>
       <Toolbar>

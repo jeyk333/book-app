@@ -4,7 +4,7 @@ import history from "../constant/history";
 import SearchPage from "../views/SearchPage";
 import AuthorPage from "../views/AuthorPage";
 
-const Routes = () => {
+const Routes: React.FC = () => {
   return (
     <Router history={history}>
       <Switch>

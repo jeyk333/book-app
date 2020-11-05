@@ -6,9 +6,24 @@ import { getBooks, resetData } from "../../store/getBooks/action";
 import { Styles } from "./styles";
 import Header from "../../components/Header";
 import SearchDataCard from "../../components/SearchDataCard";
+import { RootState } from "../../store/reducer";
 
-const SearchPage = ({ classes, getBooks, details, loading }) => {
-  const [Search, setSearch] = useState("");
+type MyProps = {
+  classes: any;
+  getBooks: () => void;
+  details: any;
+  loading: boolean;
+  resetData: () => void;
+};
+
+const SearchPage: React.FC<MyProps> = ({
+  classes,
+  getBooks,
+  details,
+  loading,
+  resetData,
+}) => {
+  const [Search, setSearch] = useState<String>("");
 
   useEffect(() => {
     return () => {
@@ -21,19 +36,21 @@ const SearchPage = ({ classes, getBooks, details, loading }) => {
     []
   );
 
-  const handleChange = (e) => {
-    console.log(e.target.value);
+  const handleChange = (e: React.SyntheticEvent<EventTarget>): void => {
     setSearch(e.target.value);
     debouncedSearch(e.target.value);
   };
 
   let totalResult = get(details, "results-end");
   let results = get(details, "results.work");
-  console.log(results);
   return (
     <div>
       <Header />
       <div className={classes.root}>
+        <Typography className={classes.heading}>
+          {" "}
+          Find Best Books Here
+        </Typography>
         <TextField
           placeholder="Search by Book Title, Author or ISBN"
           value={Search}
@@ -66,7 +83,7 @@ const SearchPage = ({ classes, getBooks, details, loading }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   details: state.books.Books,
   loading: state.books.Loading,
 });

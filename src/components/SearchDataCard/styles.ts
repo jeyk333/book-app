@@ -11,4 +11,11 @@ export const Styles = (theme: Theme) => ({
   value: {
     fontWeight: 600,
   },
+  rating: {
+    "& .fa-star": {
+      color: "#e8cd2e",
+      fontSize: 15,
+      margin: "0 2px",
+    },
+  },
 });

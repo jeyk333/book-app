@@ -4,8 +4,14 @@ import { get } from "lodash";
 import { Link } from "react-router-dom";
 import { Styles } from "./styles";
 import { dateFormat } from "../../utils";
+import Rating from "react-rating";
 
-const SearchDataCard = ({ classes, result }) => {
+type MyProps = {
+  classes: any;
+  result: any;
+};
+
+const SearchDataCard: React.FC<MyProps> = ({ classes, result }) => {
   return (
     <Paper key={result.id} className={classes.root}>
       <img
@@ -30,7 +36,13 @@ const SearchDataCard = ({ classes, result }) => {
         </Typography>
         <Typography className={classes.rating}>
           Rating:{" "}
-          <span className={classes.value}>{get(result, "average_rating")}</span>
+          <Rating
+            stop={5}
+            emptySymbol="far fa-star fa-2x"
+            fullSymbol="fas fa-star fa-2x"
+            initialRating={Number(get(result, "average_rating"))}
+            readonly
+          />
         </Typography>
         <Typography>
           Published on:{" "}

@@ -24,7 +24,7 @@ export const dateFormat = (
 };
 
 //To get first name of the author
-export const getFirstName = (value) => {
+export const getFirstName = (value: string) => {
   let fName = value.split(" ")[0];
   return fName;
 };

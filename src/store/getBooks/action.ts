@@ -14,7 +14,7 @@ const getBooksLoading = () => ({
   type: GET_BOOKS_LOADING,
 });
 
-const getBooksSuccess = (data) => ({
+const getBooksSuccess = (data: any) => ({
   type: GET_BOOKS_SUCCESS,
   data,
 });
@@ -28,7 +28,7 @@ const getAuthorLoading = () => ({
   type: GET_AUTHOR_LOADING,
 });
 
-const getAuthorSuccess = (data) => ({
+const getAuthorSuccess = (data: any) => ({
   type: GET_AUTHOR_SUCCESS,
   data,
 });
@@ -57,7 +57,7 @@ var options = {
   stopNodes: ["parse-me-as-string"],
 };
 
-export const getBooks = (value) => {
+export const getBooks = (value: string) => {
   return (dispatch) => {
     dispatch(getBooksLoading());
     axios
@@ -75,7 +75,7 @@ export const getBooks = (value) => {
   };
 };
 
-export const getAuthorDetails = (id) => {
+export const getAuthorDetails = (id: number) => {
   return (dispatch) => {
     dispatch(getAuthorLoading());
     axios
