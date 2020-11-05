@@ -1,4 +1,12 @@
-import { GET_BOOKS_LOADING, GET_BOOKS_SUCCESS, GET_BOOKS_ERROR } from "./types";
+import {
+  GET_BOOKS_LOADING,
+  GET_BOOKS_SUCCESS,
+  GET_BOOKS_ERROR,
+  GET_AUTHOR_LOADING,
+  GET_AUTHOR_SUCCESS,
+  GET_AUTHOR_ERROR,
+  RESET_DATA,
+} from "./types";
 import axios from "axios";
 import { parse } from "fast-xml-parser";
 
@@ -13,6 +21,20 @@ const getBooksSuccess = (data) => ({
 
 const getBooksError = (err: any) => ({
   type: GET_BOOKS_ERROR,
+  err,
+});
+
+const getAuthorLoading = () => ({
+  type: GET_AUTHOR_LOADING,
+});
+
+const getAuthorSuccess = (data) => ({
+  type: GET_AUTHOR_SUCCESS,
+  data,
+});
+
+const getAuthorError = (err: any) => ({
+  type: GET_AUTHOR_ERROR,
   err,
 });
 
@@ -52,3 +74,25 @@ export const getBooks = (value) => {
       });
   };
 };
+
+export const getAuthorDetails = (id) => {
+  return (dispatch) => {
+    dispatch(getAuthorLoading());
+    axios
+      .get(
+        `https://cors-anywhere.herokuapp.com/https://www.goodreads.com/author/show/${id}?format=xml&key=RYiwC8VqkEMOz7bbwvV7A`
+      )
+      .then((resp) => {
+        let parsedData = parse(resp.data, options);
+        dispatch(getAuthorSuccess(parsedData.GoodreadsResponse.author));
+      })
+      .catch((err) => {
+        getAuthorError(err);
+        console.log(err);
+      });
+  };
+};
+
+export const resetData = () => ({
+  type: RESET_DATA,
+});

@@ -1,7 +1,7 @@
 import React from "react";
 import { withStyles, Paper, Typography } from "@material-ui/core";
 import { get } from "lodash";
-import moment from "moment";
+import { Link } from "react-router-dom";
 import { Styles } from "./styles";
 import { dateFormat } from "../../utils";
 
@@ -21,9 +21,12 @@ const SearchDataCard = ({ classes, result }) => {
         </Typography>
         <Typography className={classes.authorName}>
           Author Name:{" "}
-          <span className={classes.value}>
+          <Link
+            className={classes.value}
+            to={`/author/${get(result, "best_book.author.id")}`}
+          >
             {get(result, "best_book.author.name")}
-          </span>
+          </Link>
         </Typography>
         <Typography className={classes.rating}>
           Rating:{" "}

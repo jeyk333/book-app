@@ -1,17 +1,20 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { TextField, Typography, withStyles } from "@material-ui/core";
 import { connect } from "react-redux";
 import { debounce, get } from "lodash";
-import { getBooks } from "../../store/getBooks/action";
+import { getBooks, resetData } from "../../store/getBooks/action";
 import { Styles } from "./styles";
 import Header from "../../components/Header";
 import SearchDataCard from "../../components/SearchDataCard";
 
 const SearchPage = ({ classes, getBooks, details, loading }) => {
   const [Search, setSearch] = useState("");
-  //   useEffect(() => {
-  //     getBooks(Search);
-  //   }, []);
+
+  useEffect(() => {
+    return () => {
+      resetData();
+    };
+  }, []);
 
   let debouncedSearch = useCallback(
     debounce((query) => getBooks(query), 1000),
@@ -69,6 +72,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   getBooks: (value: string) => dispatch(getBooks(value)),
+  resetData: () => dispatch(resetData()),
 });
 
 export default connect(
