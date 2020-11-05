@@ -6,12 +6,12 @@ type ValueType = {
   date?: number | string;
 };
 
+// to display published date in format
 export const dateFormat = (
   year: ValueType,
   month: ValueType,
   date: ValueType
 ) => {
-  console.log(year, month, date);
   if (year && month && date) {
     return moment(`${year}-${month}-${date}`).format("MMM Do YYYY");
   } else if (year && month) {
@@ -21,4 +21,10 @@ export const dateFormat = (
   } else {
     return "NA";
   }
+};
+
+//To get first name of the author
+export const getFirstName = (value) => {
+  let fName = value.split(" ")[0];
+  return fName;
 };
